@@ -22,7 +22,7 @@ static int format_checker(const char *format, va_list ap)
 {
     int count;
 
-    count = 0;
+    count = 0; 
     while (*format)
     {
         if (*format == 'd')
