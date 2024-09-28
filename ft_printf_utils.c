@@ -1,24 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_printf_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmilicev <mmilicev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/26 21:53:35 by mmilicev          #+#    #+#             */
-/*   Updated: 2024/09/28 00:53:44 by mmilicev         ###   ########.fr       */
+/*   Created: 2024/09/27 22:39:51 by mmilicev          #+#    #+#             */
+/*   Updated: 2024/09/28 00:57:21 by mmilicev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINT_F
-# define FT_PRINT_F 
+#include "ft_printf.h"
 
-# include <stdarg.h>
-# include "./libft/libft.h"
 
-int ft_putchar(char c);
-int ft_printstr(char *str);
-int ft_printnumber(int n);
-int ft_printhex(unsigned int, const char format);
+int ft_putchar(char c)
+{
+    write(1, &c, 1);
+    return (1);
+}
 
-#endif
+int ft_printstr(char *str)
+{
+    int len;
+    
+    len = 0;
+    while(str[len])
+    {
+        write(1, &str[len], 1);
+        len++;
+    }
+    return (len);
+}
+
+int ft_printnumber(int n)
+{
+    int len;
+    char *str;
+    
+    len = 0;
+    str = ft_itoa(n);
+    len = ft_printstr(str);
+    free(str);
+    return (len);   
+}
