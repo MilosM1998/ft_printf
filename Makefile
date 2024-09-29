@@ -14,7 +14,7 @@ OBJ = $(SRC:.c=.o)
 all: $(LIBFT) $(NAME)
 
 $(NAME): $(OBJ)
-	$(AR) $(NAME) $(OBJ) $(LIBFT)
+	$(AR) $(NAME) $(OBJ)
 
 $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)

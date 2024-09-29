@@ -131,4 +131,4 @@ int	main(void)
 	//          mixed
 	int d = 42;
 	ft_printf("Hello %s, this i%c a test, %d.\n", str, c, d);
-}  */
+} */ 

@@ -23,5 +23,5 @@ int	ft_printhex(unsigned int n, const char format);
 int	ft_puthex(unsigned int n, const char format);
 int	ft_printp(unsigned long ptr);
 int	ft_print_uint(unsigned int n);
-
+int	ft_printf(const char *format, ...);
 #endif
