@@ -17,19 +17,19 @@
 
 int	format_checker(const char format, va_list ap)
 {
-	int	count;
 	char	*str;
+	int	count;
 
 	count = 0;
-	str = va_arg(ap, char *);
 	if (format == 'd' || format == 'i')
 		count += ft_print_nbr(va_arg(ap, int));
 	else if (format == 's')
 	{
+		str = va_arg(ap, char *);
 		if (str)
 			count += ft_printstr(str);
 		else
-			count+= ft_printstr("(null)");
+			count += ft_printstr("(null)");
 	}
 	else if (format == 'c')
 		count += ft_putchar(va_arg(ap, int));
@@ -47,7 +47,7 @@ int	format_checker(const char format, va_list ap)
 int	ft_printf(const char *format, ...)
 {
 	va_list	ap;
-	int		printed;
+	int	printed;
 
 	if (format == NULL)
 		return (-1);
@@ -152,4 +152,4 @@ int	main(void)
 	//          mixed
 	int d = 42;
 	ft_printf("Hello %s, this i%c a test, %d.\n", str, c, d);
-} */ 
+}*/
