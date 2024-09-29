@@ -11,6 +11,27 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include "./libft/libft.h"
+
+static int	ft_putptr(unsigned long n)
+{
+	int	count;
+
+	count = 0;
+	if (n >= 16)
+	{
+		count += ft_putptr(n / 16);
+		count += ft_putptr(n % 16);
+	}
+	else
+	{
+		if (n <= 9)
+			count += ft_putchar(n + '0');
+		else
+			count += ft_putchar(n - 10 + 'a');
+	}
+	return (count);
+}
 
 int	ft_printp(unsigned long ptr)
 {
@@ -18,11 +39,11 @@ int	ft_printp(unsigned long ptr)
 
 	count = 0;
 	if (ptr == 0)
-		return (count += ft_printstr("0x0"));
+		return (count += ft_printstr("(nil)"));
 	else
 	{
 		count += ft_printstr("0x");
-		count += ft_puthex(ptr, 'x');
+		count += ft_putptr(ptr);
 	}
 	return (count);
 }

@@ -18,12 +18,19 @@
 int	format_checker(const char format, va_list ap)
 {
 	int	count;
+	char	*str;
 
 	count = 0;
+	str = va_arg(ap, char *);
 	if (format == 'd' || format == 'i')
 		count += ft_print_nbr(va_arg(ap, int));
 	else if (format == 's')
-		count += ft_printstr(va_arg(ap, char *));
+	{
+		if (str)
+			count += ft_printstr(str);
+		else
+			count+= ft_printstr("(null)");
+	}
 	else if (format == 'c')
 		count += ft_putchar(va_arg(ap, int));
 	else if (format == 'p')
@@ -32,6 +39,8 @@ int	format_checker(const char format, va_list ap)
 		count += ft_printhex(va_arg(ap, unsigned int), format);
 	else if (format == 'u')
 		count += ft_print_uint(va_arg(ap, unsigned int));
+	else if (format == '%')
+		count += ft_putchar('%');
 	return (count);
 }
 
@@ -49,10 +58,8 @@ int	ft_printf(const char *format, ...)
 		if (*format == '%')
 		{
 			format++;
-			if (ft_strchr("cspdiuxX", *format))
+			if (ft_strchr("cspdiuxX%", *format))
 				printed += format_checker(*format++, ap);
-			else if (*format == '%')
-				printed += ft_putchar('%');
 		}
 		else
 			printed += ft_putchar(*format++);
@@ -60,6 +67,20 @@ int	ft_printf(const char *format, ...)
 	va_end(ap);
 	return (printed);
 }
+/*
+#include <stdio.h>
+#include <limits.h>
+#include <stdint.h>
+int main() {
+    ft_printf("Test 1: %p\n", (void *)LONG_MIN);
+    ft_printf("Test 2: %p\n", (void *)LONG_MAX);
+    ft_printf("Test 3: %p\n", (void *)(uintptr_t)ULONG_MAX);
+    ft_printf("Test 4: %p\n", (void *)0);
+    
+    return 0;
+}
+*/
+
 /* #include <limits.h>
 #include <stdio.h>
 

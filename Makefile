@@ -1,35 +1,32 @@
+
+
 NAME = libftprintf.a
-
-LIBFT_DIR = ./libft
-LIBFT = $(LIBFT_DIR)/libft.a
-
+LIBFTNAME = libft.a
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
-AR = ar rcs
+CFLAGS = -Wall -Werror -Wextra
+LIBFTDIR = ./libft
 
-SRC = ft_printf.c ft_printf_utils.c ft_printhex.c ft_printp.c ft_print_uint.c
+SRCS  = ft_printf.c ft_printf_utils.c ft_printhex.c ft_printp.c ft_print_uint.c
 
-OBJ = $(SRC:.c=.o)
+OBJS = $(SRCS:.c=.o)
 
-all: $(LIBFT) $(NAME)
+all: $(NAME)
 
-$(NAME): $(OBJ)
-	$(AR) $(NAME) $(OBJ)
+makelibft:
+	@make -C $(LIBFTDIR)
+	@cp $(LIBFTDIR)/$(LIBFTNAME) .
+	@mv $(LIBFTNAME) $(NAME)
 
-$(LIBFT):
-	$(MAKE) -C $(LIBFT_DIR)
+$(NAME): makelibft $(OBJS)
+	@ar -r $(NAME) $(OBJS)
 
-%.o: %.c
-	$(CC) -c  $(CFLAGS) $<
-
-clean: 
-	rm -f $(OBJ)
-	$(MAKE) -C $(LIBFT_DIR) clean
-
+clean:
+	@rm -f $(OBJS)
+	@cd $(LIBFTDIR) && make clean
+	
 fclean: clean
-	rm -f $(NAME) 
-	$(MAKE) -C $(LIBFT_DIR) fclean
- 
+	@rm -f $(NAME)
+	@cd $(LIBFTDIR) && make fclean
+	
 re: fclean all
 
-.PHONY: all clean fclean re
