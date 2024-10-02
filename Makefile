@@ -1,5 +1,3 @@
-
-
 NAME = libftprintf.a
 LIBFTNAME = libft.a
 CC = cc
@@ -30,3 +28,4 @@ fclean: clean
 	
 re: fclean all
 
+.PHONY: all makelibft clean fclean re
