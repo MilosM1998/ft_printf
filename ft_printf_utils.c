@@ -6,12 +6,12 @@
 /*   By: mmilicev <mmilicev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 22:39:51 by mmilicev          #+#    #+#             */
-/*   Updated: 2024/09/29 18:02:39 by mmilicev         ###   ########.fr       */
+/*   Updated: 2024/10/02 19:13:13 by mmilicev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
 #include "./libft/libft.h"
+#include "ft_printf.h"
 
 int	ft_putchar(char c)
 {
@@ -22,10 +22,14 @@ int	ft_putchar(char c)
 int	ft_printstr(char *str)
 {
 	int	count;
+	int	i;
 
+	i = 0;
 	count = 0;
-	while (*str)
-		count += ft_putchar(*str++);
+	if (str == NULL)
+		str = "(null)";
+	while (str[i])
+		count += ft_putchar(str[i++]);
 	return (count);
 }
 
